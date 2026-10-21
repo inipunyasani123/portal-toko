@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+/* PortalToko: "jalan pertokoan". Dinding plester hangat, tinta terung, papan nama & kanopi tiap toko memakai warna
+   mereknya sendiri, label harga gantung dari karton kraft. */
+@theme static {
+  --font-display: var(--font-bricolage), "Avenir Next", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-dinding: #f6f1ec;
+  --color-dinding-2: #efe6df;
+  --color-kertas: #fffdfa;
+  --color-tinta: #22172b;
+  --color-tinta-2: #4c4055;
+  --color-tinta-3: #685c70;
+  --color-garis: #e2d6cf;
+  --color-garis-tua: #c4b4ab;
+  --color-fuksia: #b0145a;
+  --color-fuksia-tua: #8a0f46;
+  --color-fuksia-muda: #fbe4ee;
+  --color-jambu: #f49ac6;
+  --color-kraft: #ead6b6;
+  --color-kraft-2: #dfc59b;
+  --color-kraft-tinta: #5a4a3a;
+  --color-malam: #1d1426;
+  --color-malam-2: #2a1f35;
+  --color-malam-garis: #43364f;
+  --color-redup: #c9bccf;
+  --color-kaca: #e3edf0;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+  body {
+    background: var(--color-dinding);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  h3, h4 { line-height: 1.15; letter-spacing: -0.005em; }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 3px solid var(--color-fuksia);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .gelap :focus-visible { outline-color: var(--color-jambu); }
+  ::selection { background: var(--color-fuksia-muda); color: var(--color-tinta); }
+}
+
+@layer components {
+  .wadah { width: 100%; max-width: 75rem; margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 640px) { .wadah { padding-inline: 1.5rem; } }
+
+  .lewati {
+    position: absolute; left: 0.75rem; top: -4rem; z-index: 60;
+    border-radius: 999px; background: var(--color-tinta); color: var(--color-kertas);
+    padding: 0.6rem 1rem; font-weight: 600; font-size: 0.9rem;
+  }
+  .lewati:focus { top: 0.75rem; }
+
+  .label {
+    font-family: var(--font-display);
+    font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--color-fuksia);
+  }
+  .gelap .label { color: var(--color-jambu); }
+
+  .tombol {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 2.9rem; padding: 0 1.25rem; border-radius: 0.8rem;
+    font-weight: 650; font-size: 0.98rem; line-height: 1.2; text-align: center;
+    transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  }
+  .tombol:hover { transform: translateY(-1px); }
+  .tombol-tinta { background: var(--color-tinta); color: var(--color-kertas); }
+  .tombol-tinta:hover { background: #3a2b47; }
+  .tombol-fuksia { background: var(--color-fuksia); color: #fff; }
+  .tombol-fuksia:hover { background: var(--color-fuksia-tua); }
+  .tombol-garis { border: 1.5px solid var(--color-garis-tua); color: var(--color-tinta); background: var(--color-kertas); }
+  .tombol-garis:hover { border-color: var(--color-tinta); }
+  .tombol-merek { background: var(--m-bg); color: var(--m-fg); }
+  .tombol-merek:hover { filter: brightness(1.12); }
+  .gelap .tombol-garis { background: transparent; color: var(--color-dinding); border-color: var(--color-malam-garis); }
+  .gelap .tombol-garis:hover { border-color: var(--color-dinding); }
+
+  /* --- Motif: kanopi bergaris dengan tepi bergelombang --- */
+  .kanopi {
+    --lebar: 16px;
+    display: block; height: 1.35rem;
+    background: repeating-linear-gradient(90deg, var(--m-k1) 0 var(--lebar), var(--m-k2) var(--lebar) calc(var(--lebar) * 2));
+    -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 7px) no-repeat,
+      radial-gradient(circle 8px at 8px 0, #000 96%, #0000 100%) bottom left / var(--lebar) 7px repeat-x;
+    mask: linear-gradient(#000 0 0) top / 100% calc(100% - 7px) no-repeat,
+      radial-gradient(circle 8px at 8px 0, #000 96%, #0000 100%) bottom left / var(--lebar) 7px repeat-x;
+  }
+  .kanopi-besar {
+    --lebar: 22px; height: 1.75rem;
+    -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
+      radial-gradient(circle 11px at 11px 0, #000 96%, #0000 100%) bottom left / var(--lebar) 9px repeat-x;
+    mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
+      radial-gradient(circle 11px at 11px 0, #000 96%, #0000 100%) bottom left / var(--lebar) 9px repeat-x;
+  }
+
+  /* --- Motif: kaca etalase (pantulan miring) --- */
+  .kaca { position: relative; overflow: hidden; isolation: isolate; }
+  .kaca::after {
+    content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background:
+      linear-gradient(118deg, transparent 0 34%, rgb(255 255 255 / 0.5) 34% 41%, transparent 41% 49%, rgb(255 255 255 / 0.3) 49% 52%, transparent 52%),
+      linear-gradient(180deg, rgb(34 23 43 / 0.16), transparent 22%);
+    mix-blend-mode: screen;
+  }
+
+  /* --- Motif: trotoar ubin di bawah etalase --- */
+  .trotoar {
+    display: block; height: 0.85rem;
+    background:
+      linear-gradient(90deg, rgb(34 23 43 / 0.14) 1px, transparent 1px) 0 0 / 22px 100%,
+      linear-gradient(#d9cdc4, #cdbfb5);
+    border-top: 3px solid #b8a89c;
+  }
+
+  /* --- Motif: label harga gantung (lubang + tali) --- */
+  .label-gantung {
+    position: relative; display: inline-block;
+    background: var(--color-kraft); color: var(--color-tinta);
+    padding: 0.28rem 0.6rem 0.28rem 1.15rem;
+    font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; line-height: 1.2;
+    letter-spacing: 0.02em;
+    clip-path: polygon(0.55rem 0, 100% 0, 100% 100%, 0.55rem 100%, 0 50%);
+    box-shadow: inset 0 -2px 0 rgb(90 74 58 / 0.18);
+  }
+  .label-gantung::before {
+    content: ""; position: absolute; left: 0.5rem; top: 50%; width: 0.36rem; height: 0.36rem; margin-top: -0.18rem;
+    border-radius: 999px; background: var(--lubang, var(--color-dinding)); box-shadow: inset 0 0 0 1px rgb(90 74 58 / 0.45);
+  }
+
+  /* label tegak berlubang di atas, untuk langkah belanja & paket */
+  .tag {
+    position: relative; background: var(--color-kraft); color: var(--color-tinta);
+    clip-path: polygon(1.4rem 0, calc(100% - 1.4rem) 0, 100% 1.4rem, 100% 100%, 0 100%, 0 1.4rem);
+    border-radius: 0 0 0.9rem 0.9rem;
+  }
+  .tag-lubang {
+    position: absolute; left: 50%; top: 0.85rem; width: 0.9rem; height: 0.9rem; margin-left: -0.45rem;
+    border-radius: 999px; background: var(--lubang, var(--color-dinding)); box-shadow: inset 0 0 0 2px rgb(90 74 58 / 0.35);
+  }
+  .tali { position: absolute; left: 50%; bottom: 100%; width: 2px; margin-left: -1px; background: var(--tali, #9c7d5a); }
+
+  /* --- Ruko di pahlawan --- */
+  .ruko { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; }
+  .ruko-papan {
+    display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+    height: 2.6rem; padding: 0 0.6rem; background: var(--m-bg); color: var(--m-fg);
+    box-shadow: inset 0 -3px 0 rgb(0 0 0 / 0.18);
+  }
+  .ruko-jendela {
+    position: relative; height: 9.75rem; background: var(--m-dalam);
+    border: 5px solid var(--color-tinta); border-top: 0;
+  }
+  .ruko-atas { border-radius: 0.4rem 0.4rem 0 0; }
+  @media (min-width: 640px) {
+    /* ruko berdempetan: kusen yang bersebelahan jadi satu tiang */
+    .deretan > li + li .ruko-jendela { border-left-width: 3px; }
+  }
+  @media (min-width: 1024px) { .ruko-jendela { height: 12rem; } }
+  .ruko .label-gantung { transform: rotate(5deg); transform-origin: 0.3rem 50%; transition: transform 0.35s cubic-bezier(.3,1.6,.5,1); }
+  .ruko:hover .label-gantung, .ruko:focus-visible .label-gantung { transform: rotate(-4deg); }
+  .ruko:hover .ruko-papan { filter: brightness(1.1); }
+
+  /* --- Ponsel --- */
+  .ponsel {
+    position: relative; display: block; border-radius: 1.6rem; padding: 0.45rem;
+    background: #17111c; box-shadow: 0 24px 40px -24px rgb(34 23 43 / 0.55), inset 0 0 0 1.5px #3b3043;
+  }
+  .ponsel-layar { position: relative; overflow: hidden; border-radius: 1.2rem; aspect-ratio: 390 / 844; background: var(--m-dalam, #eee); }
+
+  .chip {
+    display: inline-flex; align-items: center; min-height: 2.25rem; padding: 0 0.85rem; border-radius: 999px;
+    border: 1.5px solid var(--color-garis); background: var(--color-kertas); color: var(--color-tinta-2);
+    font-size: 0.88rem; font-weight: 600; transition: border-color 0.18s ease, color 0.18s ease;
+  }
+  .chip:hover { border-color: var(--color-tinta); color: var(--color-tinta); }
+
+  .tanya summary::-webkit-details-marker { display: none; }
+}
+
+/* Ayunan label waktu diarahkan: hanya bila gerak tidak dikurangi */
+@media (prefers-reduced-motion: no-preference) {
+  .ayun { transform-origin: 50% -2.5rem; transition: transform 0.5s cubic-bezier(.3,1.5,.5,1); }
+  .ayun:hover { transform: rotate(var(--ayun, -1.5deg)); }
+}
+
+@layer components {
+  /* gantungan label kecil di etalase: tali dari atas kaca ke lubang label */
+  .gantung { position: relative; display: inline-block; }
+  .gantung::before {
+    content: ""; position: absolute; z-index: 1; left: 0.68rem; bottom: 50%; width: 1.5px; height: 1.7rem;
+    background: var(--color-kraft-tinta); opacity: 0.7;
+  }
+  .ruko .gantung .label-gantung { transform-origin: 0.68rem 50%; }
+
+  /* rel gantungan: tiap butir punya potongan rel sendiri, jadi barisnya menyambung di layar lebar */
+  .rel > li { position: relative; }
+  .rel > li::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 4px;
+    background: var(--rel, #9c7d5a);
+  }
+  @media (min-width: 640px) {
+    .rel > li::before { left: calc(var(--sela, 1.5rem) / -2); right: calc(var(--sela, 1.5rem) / -2); }
+  }
+
+  /* butir "khas toko": label harga mini */
+  .titik-label {
+    position: relative; flex-shrink: 0; width: 1.05rem; height: 0.62rem; margin-top: 0.42rem;
+    background: var(--m-bg); clip-path: polygon(0.3rem 0, 100% 0, 100% 100%, 0.3rem 100%, 0 50%);
+  }
+  .titik-label::after {
+    content: ""; position: absolute; left: 0.26rem; top: 50%; width: 0.18rem; height: 0.18rem; margin-top: -0.09rem;
+    border-radius: 999px; background: var(--color-kertas);
+  }
+
+  .kartu-isi {
+    grid-template-columns: minmax(0, 8.25rem) minmax(0, 1fr);
+    grid-template-areas: "ponsel tag" "ponsel desc" "khas khas";
+    align-items: start;
+  }
+  @media (min-width: 640px) {
+    .kartu-isi { grid-template-columns: 12rem minmax(0, 1fr); grid-template-areas: "ponsel tag" "ponsel desc" "ponsel khas"; grid-template-rows: auto auto 1fr; }
+  }
+}
