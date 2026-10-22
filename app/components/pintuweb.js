@@ -11,16 +11,16 @@ export const wa = (teks) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponen
 
 /**
  * Dua paket toko online dari PintuWeb/app/lib/packages.ts (slug, title, minPrice/maxPrice, time, subtitle, badge,
- * features), disalin apa adanya. Satu-satunya tempat angka bisnis di portal ini. PRICES_UPDATED di sana: 2026-10-13.
+ * features), disalin apa adanya. Satu-satunya tempat angka bisnis di portal ini. PRICES_UPDATED di sana: 2026-10-22.
  */
-export const HARGA_PER = '13 Oktober 2026';
+export const HARGA_PER = '22 Oktober 2026';
 export const PAKET = [
   {
     slug: 'toko-online-simple',
     nama: 'Toko Online Simple',
     subjudul: 'Mulai jualan online tanpa ribet',
-    mulai: 'Rp1.250.000',
-    sampai: 'Rp1.750.000',
+    mulai: 'Rp300.000',
+    sampai: 'Rp2.000.000',
     waktu: '3–5 hari kerja',
     fitur: [
       'Katalog produk hingga 20 item',
@@ -37,8 +37,8 @@ export const PAKET = [
     nama: 'Toko Online Full',
     lencana: 'Premium',
     subjudul: 'Toko online lengkap dengan dashboard admin',
-    mulai: 'Rp2.500.000',
-    sampai: 'Rp4.500.000',
+    mulai: 'Rp3.000.000',
+    sampai: 'Rp10.000.000+',
     waktu: '5–8 hari kerja',
     fitur: [
       'Keranjang belanja & sistem checkout lengkap',
