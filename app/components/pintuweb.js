@@ -65,6 +65,7 @@ export const GALERI = [
   { path: 'aplikasi-to-do', label: 'Aplikasi To-Do' },
   { path: 'toko-online', label: 'Toko Online' },
   { path: 'menu-digital', label: 'Menu Digital' },
+  { path: 'aplikasi-mobile', label: 'Aplikasi Mobile' },
 ];
 
 export const GALERI_LAIN = GALERI.filter((g) => g.path !== 'toko-online');
