@@ -244,3 +244,12 @@
     .kartu-isi { grid-template-columns: 12rem minmax(0, 1fr); grid-template-areas: "ponsel tag" "ponsel desc" "ponsel khas"; grid-template-rows: auto auto 1fr; }
   }
 }
+
+/* Sorotan kartu saat dibuka lewat #slug (±2 dtk), bilah aksi lengket, ponsel kecil di strip */
+@layer components {
+  .kartu-toko[data-sorot] > article { outline: 3px solid var(--m-k1, var(--color-fuksia)); outline-offset: 4px; }
+  .ponsel-kecil { padding: 0.28rem; border-radius: 1.15rem; }
+  .ponsel-kecil .ponsel-layar { border-radius: 0.9rem; }
+  .bilah-aksi { transition: transform 0.25s ease, visibility 0.25s; }
+  .bilah-sembunyi { transform: translateY(100%); visibility: hidden; }
+}

@@ -1,9 +1,23 @@
-import Image from 'next/image';
+import Image, { getImageProps } from 'next/image';
 import { toko, JUMLAH, NAMA_JUMLAH } from './components/toko-data';
 import { Merek, Tanda, IsiEtalase, LantaiAtas } from './components/merek';
-import { LANJUT, GALERI_LAIN, PINTUWEB, PAKET, SIMPLE, FULL, HARGA_PER, WA_DISPLAY, JAM_KERJA, wa } from './components/pintuweb';
+import { GaleriLain, SorotTautan, BilahAksi } from './components/interaksi';
+import { LANJUT, BACA, GALERI_LAIN, PINTUWEB, PAKET, SIMPLE, FULL, HARGA_PER, WA_DISPLAY, JAM_KERJA, wa } from './components/pintuweb';
 
 const WA = wa('Halo PintuWeb, saya mau buat toko online untuk usaha saya. Boleh minta info?');
+const SLUGS = toko.map((t) => t.slug);
+
+/** <picture> potret ponsel: gambar 2× untuk layar < 768 px, gambar biasa untuk layar lebar. Memakai loader statis, bukan optimizer Vercel. */
+function Potret({ t, sizes, sizesM = sizes, className = '', prioritas = false }) {
+  const { props: d } = getImageProps({ src: t.image, alt: '', fill: true, sizes, priority: prioritas });
+  const { props: m } = getImageProps({ src: t.imageM, alt: '', fill: true, sizes: sizesM });
+  return (
+    <picture>
+      <source media="(max-width: 767px)" srcSet={m.srcSet} sizes={sizesM} />
+      <img {...d} alt="" className={className} />
+    </picture>
+  );
+}
 
 /** Variabel warna merek tiap toko untuk papan nama, kanopi, isi etalase, dan tombolnya. */
 const warna = (t) => ({
@@ -102,8 +116,8 @@ function IkonKantong({ className = '' }) {
 function Logo({ gelap = false }) {
   return (
     <>
-      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[0.65rem] bg-fuksia text-white" aria-hidden="true">
-        <IkonKantong className="h-5 w-5" />
+      <span className={`grid shrink-0 place-items-center ${gelap ? 'rounded-lg bg-white px-1.5 py-1' : ''}`} aria-hidden="true">
+        <Image src="/toko-online/images/logo-pintuweb.png" alt="" width={22} height={30} className="h-[30px] w-auto" />
       </span>
       <span className="flex flex-col leading-none">
         <span className="font-display text-[1rem] font-bold tracking-tight">PintuWeb</span>{' '}
@@ -128,10 +142,11 @@ export default function PortalToko() {
 
       {/* Jejak: portal ini bagian dari PintuWeb */}
       <nav aria-label="Jejak" className="bg-tinta text-xs text-dinding">
-        <ol className="wadah flex items-center gap-2 py-1.5">
+        <ol className="wadah flex items-center gap-2 py-1">
           <li><a href={PINTUWEB} className="font-semibold underline-offset-4 hover:underline">PintuWeb</a></li>
           <li aria-hidden="true" className="opacity-60">/</li>
           <li aria-current="page">Toko Online</li>
+          <li className="ms-auto list-none"><GaleriLain galeri={GALERI_LAIN} pintuweb={PINTUWEB} /></li>
         </ol>
       </nav>
 
@@ -153,26 +168,41 @@ export default function PortalToko() {
 
       <main id="konten" tabIndex={-1}>
         {/* Pahlawan: deretan ruko, satu per toko */}
-        <section aria-labelledby="judul-utama" className="relative border-b border-garis">
-          <div className="wadah grid gap-10 pb-12 pt-10 sm:pb-16 sm:pt-14 lg:grid-cols-12 lg:items-end lg:gap-8 lg:pb-20 lg:pt-16">
-            <div className="lg:col-span-5 lg:pb-6">
+        <section id="hero" aria-labelledby="judul-utama" className="relative border-b border-garis">
+          <div className="wadah grid gap-6 pb-8 pt-6 sm:gap-10 sm:pb-16 sm:pt-14 lg:grid-cols-12 lg:items-end lg:gap-8 lg:pb-20 lg:pt-16">
+            <div className="min-w-0 lg:col-span-5 lg:pb-6">
               <p className="label">Galeri toko online · {JUMLAH} demo</p>
-              <h1 id="judul-utama" className="mt-4 text-[2.35rem] sm:text-[3.4rem] lg:text-[3.6rem]">
+              <h1 id="judul-utama" className="mt-4 text-[1.9rem] sm:text-[3.4rem] lg:text-[3.6rem]">
                 Coba belanja di {NAMA_JUMLAH.toLowerCase()} toko, dari keranjang sampai lacak pesanan.
               </h1>
-              <p className="mt-5 max-w-xl text-[1.05rem] leading-relaxed text-tinta-2">
+              <p className="mt-5 hidden max-w-xl text-[1.05rem] leading-relaxed text-tinta-2 sm:block">
                 Keramik, perawatan kulit, busana lurik, dan tanaman hias. Tiap toko fiktif punya katalog bersaring, varian dengan stok sendiri, keranjang, checkout dengan ongkir yang dihitung otomatis, dan dasbor penjual. Belanjalah sepuasnya: pembayarannya simulasi.
               </p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
+              <div className="mt-5 flex flex-wrap items-center gap-3 sm:mt-7">
                 <a href="#toko" className="tombol tombol-fuksia">Masuk ke {NAMA_JUMLAH.toLowerCase()} toko</a>
-                <a href="#paket" className="tombol tombol-garis">Paket & harga</a>
+                <a href="#paket" className="tombol tombol-garis hidden sm:inline-flex">Paket & harga</a>
               </div>
-              <p className="mt-5 text-sm text-tinta-3">
+              <ul className="-mx-4 mt-5 flex scroll-px-4 snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:hidden" aria-label="Geser untuk melihat demo toko">
+                {toko.map((t) => (
+                  <li key={t.slug} className="w-[7.25rem] shrink-0 snap-start" style={warna(t)}>
+                    <a href={`#${t.slug}`} className="block rounded-2xl">
+                      <span className="ponsel ponsel-kecil">
+                        <span className="ponsel-layar block">
+                          <Potret t={t} sizes="116px" />
+                        </span>
+                      </span>
+                      <span className="mt-2 block font-display text-[0.95rem] font-bold leading-tight">{t.nama}</span>
+                      <span className="block text-xs text-tinta-3">{t.kategori}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 hidden text-sm text-tinta-3 sm:block">
                 Mulai <strong className="font-display text-base font-bold text-tinta">{SIMPLE.mulai}</strong> · pengerjaan {SIMPLE.waktu}
               </p>
             </div>
 
-            <div className="lg:col-span-7">
+            <div className="hidden sm:block lg:col-span-7">
               <ul className="deretan grid grid-cols-2 items-end gap-x-3 gap-y-7 sm:grid-cols-4 sm:gap-x-0" aria-label="Deretan toko di galeri ini">
                 {toko.map((t) => (
                   <li key={t.slug} style={warna(t)}>
@@ -214,7 +244,7 @@ export default function PortalToko() {
 
             <ol className="mt-10 grid gap-6 sm:mt-12 lg:grid-cols-2">
               {toko.map((t, i) => (
-                <li key={t.slug} id={t.slug} className="scroll-mt-20" style={warna(t)}>
+                <li key={t.slug} id={t.slug} className="kartu-toko scroll-mt-20" style={warna(t)}>
                   <article aria-labelledby={`nama-${t.slug}`} className="flex h-full flex-col overflow-hidden rounded-2xl border border-garis bg-kertas shadow-[0_24px_50px_-34px_rgba(34,23,43,0.45)]">
                     <div className="flex items-center gap-3 px-4 py-3.5 sm:px-6" style={{ background: t.merek.bg, color: t.merek.fg }}>
                       <Tanda slug={t.slug} className="h-8 w-8 shrink-0 sm:h-9 sm:w-9" />
@@ -231,7 +261,7 @@ export default function PortalToko() {
                     <div className="kartu-isi grid gap-x-5 gap-y-4 px-4 pb-5 pt-3 sm:px-6 sm:pb-6">
                       <a href={t.url} target="_blank" rel="noopener noreferrer" className="ponsel [grid-area:ponsel]" tabIndex={-1} aria-hidden="true">
                         <span className="ponsel-layar block">
-                          <Image src={t.image} alt="" fill sizes="(min-width: 640px) 192px, 132px" className="object-cover object-top" />
+                          <Potret t={t} sizes="192px" sizesM="132px" className="absolute inset-0 h-full w-full object-cover object-top" />
                         </span>
                       </a>
                       <p className="font-display text-[1.15rem] font-bold leading-snug [grid-area:tag] sm:text-[1.35rem]">{t.tagline}</p>
@@ -262,8 +292,9 @@ export default function PortalToko() {
                       </ul>
                       <div className="mt-5 flex flex-wrap gap-3">
                         <a href={t.url} target="_blank" rel="noopener noreferrer" className="tombol tombol-merek" style={{ '--m-bg': t.merek.tombolBg || t.merek.bg, '--m-fg': t.merek.tombolFg }}>Masuk toko {t.nama}</a>
-                        <a href={wa(`Halo PintuWeb, saya tertarik toko online seperti ${t.nama}. Boleh minta info?`)} target="_blank" rel="noopener noreferrer" className="tombol tombol-garis">Pesan yang seperti ini</a>
+                        <a href={wa(`Halo PintuWeb, saya tertarik toko online seperti contoh ${t.nama} (${t.url}). Boleh minta info?`)} target="_blank" rel="noopener noreferrer" className="tombol tombol-garis">Pesan yang mirip</a>
                       </div>
+                      <p className="mt-3 text-sm text-tinta-3">Setara {FULL.nama}: mulai <strong className="font-semibold text-tinta">{FULL.mulai}</strong> · {FULL.waktu}</p>
                     </div>
                   </article>
                 </li>
@@ -416,7 +447,7 @@ export default function PortalToko() {
         </section>
       </main>
 
-      <footer className="gelap bg-malam pb-6 pt-10 text-redup">
+      <footer className="gelap bg-malam pt-10 text-redup max-md:pb-[calc(1.5rem+env(safe-area-inset-bottom))] md:pb-6">
         <div className="wadah grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
           <div className="col-span-2 sm:col-span-1">
             <p className="flex items-center gap-2.5 text-dinding"><Logo gelap /></p>
@@ -430,6 +461,12 @@ export default function PortalToko() {
               ))}
               <li><a href={WA} target="_blank" rel="noopener noreferrer" className="inline-block py-1 transition hover:text-dinding">WhatsApp <span className="whitespace-nowrap">{WA_DISPLAY}</span></a></li>
             </ul>
+            <p id="kaki-baca" className="label mt-5">Baca juga</p>
+            <ul aria-labelledby="kaki-baca" className="mt-3 space-y-1">
+              {BACA.map((l) => (
+                <li key={l.href}><a href={l.href} className="inline-block py-1 transition hover:text-dinding">{l.label}</a></li>
+              ))}
+            </ul>
           </nav>
           <nav aria-labelledby="kaki-galeri" className="text-sm">
             <p id="kaki-galeri" className="label">Galeri lain</p>
@@ -442,6 +479,8 @@ export default function PortalToko() {
         </div>
         <p className="wadah mt-10 border-t border-malam-garis pt-4 text-xs">© 2026 PintuWeb. Semua usaha di demo ini fiktif. Berlokasi di Tulungagung.</p>
       </footer>
+      <BilahAksi hrefWa={WA} />
+      <SorotTautan slugs={SLUGS} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
     </div>
   );

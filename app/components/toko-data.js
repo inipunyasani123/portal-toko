@@ -25,6 +25,7 @@ export const toko = [
     kode: 'TNR',
     url: 'https://toko-tanur.pintuweb.id',
     image: '/toko-online/images/toko/tanur.webp',
+    imageM: '/toko-online/images/toko/tanur-m.webp',
     merek: { bg: '#231c17', fg: '#f3ece1', k1: '#b6623b', k2: '#f3ece1', dalam: '#f3ece1', tombolFg: '#ffffff' },
   },
   {
@@ -50,6 +51,7 @@ export const toko = [
     kode: 'TKR',
     url: 'https://toko-takar.pintuweb.id',
     image: '/toko-online/images/toko/takar.webp',
+    imageM: '/toko-online/images/toko/takar-m.webp',
     merek: { bg: '#f3b51b', fg: '#17201c', k1: '#2e5b46', k2: '#fcfcf9', dalam: '#f3f5f1', tombolBg: '#17201c', tombolFg: '#fcfcf9' },
   },
   {
@@ -75,6 +77,7 @@ export const toko = [
     kode: 'LGS',
     url: 'https://toko-lungsin.pintuweb.id',
     image: '/toko-online/images/toko/lungsin.webp',
+    imageM: '/toko-online/images/toko/lungsin-m.webp',
     merek: { bg: '#1d3157', fg: '#fffdf8', k1: '#1d3157', k2: '#f7f5ef', dalam: '#f7f5ef', tombolFg: '#ffffff' },
   },
   {
@@ -100,6 +103,7 @@ export const toko = [
     kode: 'DJ',
     url: 'https://toko-daunjendela.pintuweb.id',
     image: '/toko-online/images/toko/daunjendela.webp',
+    imageM: '/toko-online/images/toko/daunjendela-m.webp',
     merek: { bg: '#1f5c43', fg: '#f2f1ea', k1: '#1f5c43', k2: '#f2f1ea', dalam: '#f2f1ea', tombolFg: '#ffffff' },
   },
 ];

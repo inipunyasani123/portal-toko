@@ -46,3 +46,7 @@ Buka http://localhost:3000/toko-online. Untuk build produksi: `npm run build` la
 ---
 
 Dibuat oleh [PintuWeb](https://www.pintuweb.id), jasa pembuatan website.
+
+## Tautan langsung per demo
+
+Tiap kartu toko punya `id` = slug: `tanur`, `takar`, `lungsin`, `daunjendela`. `/toko-online#<slug>` menggulir ke kartunya dan menyorotnya ±2 detik. Potret ponsel: `<slug>.webp` (390×844, layar lebar) dan `<slug>-m.webp` (780×1688, layar < 768 px).
