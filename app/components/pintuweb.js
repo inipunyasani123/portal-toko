@@ -4,6 +4,7 @@ import HARGA from './harga.json';
 /** Harga & kontak dibaca dari ./harga.json (salinan https://www.pintuweb.id/harga.json, diambil scripts/ambil-harga.mjs saat build). */
 const P = (slug) => HARGA.paket[slug];
 const rp = (n) => `Rp${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+const tanggal = (iso) => { const [y, m, d] = iso.split('-').map(Number); return `${d} ${["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"][m - 1]} ${y}`; };
 
 export const PINTUWEB = 'https://www.pintuweb.id';
 export const URL_PORTAL = `${PINTUWEB}/toko-online`;
@@ -16,9 +17,9 @@ export const wa = (teks) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponen
 
 /**
  * Dua paket toko online dari PintuWeb/app/lib/packages.ts (slug, title, minPrice/maxPrice, time, subtitle, badge,
- * features), disalin apa adanya. Satu-satunya tempat angka bisnis di portal ini. PRICES_UPDATED di sana: 2026-10-22.
+ * features). Angka dari harga.json; tanggal berlaku = PRICES_UPDATED di sana.
  */
-export const HARGA_PER = '22 Oktober 2026';
+export const HARGA_PER = tanggal(HARGA.diperbarui);
 export const PAKET = [
   {
     slug: 'toko-online-simple',
