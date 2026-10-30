@@ -11,7 +11,7 @@ const figtree = localFont({ src: './fonts/figtree.woff2', weight: '300 900', var
 
 // Merek di hasil pencarian & pratinjau tautan = PintuWeb. Jumlah demo dihitung dari data, bukan ditulis tangan.
 const TITLE = `Contoh Toko Online: ${toko.length} Demo Siap Coba | PintuWeb`;
-const DESCRIPTION = 'Empat demo toko online: keramik, perawatan kulit, busana lurik, dan tanaman hias. Coba katalog, keranjang, checkout, lacak pesanan, dan dasbor penjual.';
+const DESCRIPTION = 'Empat contoh toko online: keramik, perawatan kulit, busana, dan tanaman hias. Coba keranjang, checkout, dan lacak pesanan.';
 
 // CollectionPage + daftar demonya (ItemList) + jejak. Data dari toko-data, jadi ikut bertambah sendiri.
 const jsonLd = {
