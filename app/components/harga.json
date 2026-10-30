@@ -1,0 +1,131 @@
+{
+  "diperbarui": "2026-10-23",
+  "wa": {
+    "nomor": "6285190931399",
+    "tampil": "+62 851 9093 1399"
+  },
+  "garansiHari": 30,
+  "targetSkor": "90+",
+  "paket": {
+    "landing-page": {
+      "nama": "Landing Page",
+      "mulai": 100000,
+      "sampai": 500000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "1–2 hari kerja"
+    },
+    "standar-umkm": {
+      "nama": "Standar UMKM",
+      "mulai": 500000,
+      "sampai": 1500000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "2–3 hari kerja"
+    },
+    "toko-online-simple": {
+      "nama": "Toko Online Simple",
+      "mulai": 300000,
+      "sampai": 2000000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "3–5 hari kerja"
+    },
+    "toko-online-full": {
+      "nama": "Toko Online Full",
+      "mulai": 3000000,
+      "sampai": 10000000,
+      "lebih": true,
+      "sesuaiKebutuhan": false,
+      "waktu": "5–8 hari kerja"
+    },
+    "link-in-bio": {
+      "nama": "Link in Bio",
+      "mulai": 100000,
+      "sampai": 300000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "1–2 hari kerja"
+    },
+    "undangan-digital": {
+      "nama": "Undangan Digital",
+      "mulai": 50000,
+      "sampai": 200000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "1 hari kerja"
+    },
+    "situs-acara": {
+      "nama": "Situs Acara & Undangan Custom",
+      "mulai": 300000,
+      "sampai": 1000000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "2–4 hari kerja"
+    },
+    "portofolio": {
+      "nama": "Portofolio / Personal Branding",
+      "mulai": 150000,
+      "sampai": 1200000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "2–3 hari kerja"
+    },
+    "sistem-reservasi": {
+      "nama": "Sistem Reservasi Online",
+      "mulai": 1500000,
+      "sampai": 5000000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "1–2 minggu"
+    },
+    "website-properti": {
+      "nama": "Website Properti",
+      "mulai": 1000000,
+      "sampai": 10000000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "5–8 hari kerja"
+    },
+    "marketplace-properti": {
+      "nama": "Marketplace Properti",
+      "mulai": 3000000,
+      "sampai": 10000000,
+      "lebih": true,
+      "sesuaiKebutuhan": false,
+      "waktu": "2–4 minggu"
+    },
+    "aplikasi-web": {
+      "nama": "Aplikasi Web",
+      "mulai": 2000000,
+      "sampai": 10000000,
+      "lebih": true,
+      "sesuaiKebutuhan": false,
+      "waktu": "1–2 minggu"
+    },
+    "website-custom": {
+      "nama": "Website Custom",
+      "mulai": null,
+      "sampai": null,
+      "lebih": false,
+      "sesuaiKebutuhan": true,
+      "waktu": "1–3 minggu, tergantung fitur"
+    },
+    "aplikasi-mobile": {
+      "nama": "Aplikasi Mobile (Android & iOS)",
+      "mulai": 500000,
+      "sampai": 10000000,
+      "lebih": true,
+      "sesuaiKebutuhan": false,
+      "waktu": "3–7 hari kerja"
+    },
+    "konsep-desain": {
+      "nama": "Konsep Desain Website",
+      "mulai": 1000000,
+      "sampai": 3000000,
+      "lebih": false,
+      "sesuaiKebutuhan": false,
+      "waktu": "3–5 hari kerja"
+    }
+  }
+}

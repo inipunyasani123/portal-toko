@@ -1,11 +1,16 @@
+import HARGA from './harga.json';
 // Tautan ke situs utama PintuWeb. Portal ini zona terpisah (basePath /toko-online) di domain yang sama, jadi
 // semua tautan ke situs utama memakai URL absolut dan <a> biasa: next/link akan menempelkan basePath.
+/** Harga & kontak dibaca dari ./harga.json (salinan https://www.pintuweb.id/harga.json, diambil scripts/ambil-harga.mjs saat build). */
+const P = (slug) => HARGA.paket[slug];
+const rp = (n) => `Rp${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+
 export const PINTUWEB = 'https://www.pintuweb.id';
 export const URL_PORTAL = `${PINTUWEB}/toko-online`;
 
 /** Kontak & jam kerja dari PintuWeb/app/lib/site.ts (WA_NUMBER, WA_DISPLAY, HOURS). Ganti di sana = ganti di sini. */
-export const WA_NUMBER = '6285190931399';
-export const WA_DISPLAY = '+62 851 9093 1399';
+export const WA_NUMBER = HARGA.wa.nomor;
+export const WA_DISPLAY = HARGA.wa.tampil;
 export const JAM_KERJA = 'Senin – Sabtu, 08.00 – 19.00 WIB';
 export const wa = (teks) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(teks)}`;
 
@@ -19,9 +24,9 @@ export const PAKET = [
     slug: 'toko-online-simple',
     nama: 'Toko Online Simple',
     subjudul: 'Mulai jualan online tanpa ribet',
-    mulai: 'Rp300.000',
-    sampai: 'Rp2.000.000',
-    waktu: '3–5 hari kerja',
+    mulai: rp(P('toko-online-simple').mulai),
+    sampai: rp(P('toko-online-simple').sampai) + (P('toko-online-simple').lebih ? '+' : ''),
+    waktu: P('toko-online-simple').waktu,
     fitur: [
       'Katalog produk hingga 20 item',
       'Checkout via WhatsApp (langsung order)',
@@ -37,9 +42,9 @@ export const PAKET = [
     nama: 'Toko Online Full',
     lencana: 'Premium',
     subjudul: 'Toko online lengkap dengan dashboard admin',
-    mulai: 'Rp3.000.000',
-    sampai: 'Rp10.000.000+',
-    waktu: '5–8 hari kerja',
+    mulai: rp(P('toko-online-full').mulai),
+    sampai: rp(P('toko-online-full').sampai) + (P('toko-online-full').lebih ? '+' : ''),
+    waktu: P('toko-online-full').waktu,
     fitur: [
       'Keranjang belanja & sistem checkout lengkap',
       'Integrasi payment gateway',
