@@ -127,5 +127,25 @@
       "sesuaiKebutuhan": false,
       "waktu": "3–5 hari kerja"
     }
+  },
+  "tambahan": {
+    "halaman": {
+      "nama": "Halaman tambahan",
+      "mulai": 150000,
+      "sampai": 350000,
+      "satuan": "per halaman"
+    },
+    "maintenance": {
+      "nama": "Maintenance lanjutan",
+      "mulai": 150000,
+      "sampai": 500000,
+      "satuan": "per bulan"
+    },
+    "artikel": {
+      "nama": "Artikel blog SEO",
+      "mulai": 100000,
+      "sampai": 250000,
+      "satuan": "per artikel"
+    }
   }
 }
