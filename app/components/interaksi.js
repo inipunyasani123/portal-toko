@@ -92,6 +92,8 @@ export function BilahAksi({ hrefWa }) {
   const tampil = lewat && !kaki;
   return (
     <div
+      role="region"
+      aria-label="Aksi cepat"
       className={`bilah-aksi fixed inset-x-0 bottom-0 z-40 border-t border-garis-tua bg-kertas/95 px-4 pt-3 backdrop-blur-xl md:hidden ${tampil ? '' : 'bilah-sembunyi'}`}
       style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
       aria-hidden={!tampil}
